@@ -3,7 +3,7 @@ node_modules
 .firebaserc
 firestore.indexes.json
 package-lock.json
-public/f/js/init.js
+public/js/init.js
 public/dist
 firestore-debug.log
 firebase-debug.log
