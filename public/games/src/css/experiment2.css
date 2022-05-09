@@ -1,0 +1,394 @@
+
+.up-button {
+    width: 12vw;
+    height: 12vw;
+    position: absolute;
+    background-image: url("../../extension-mobile-buttons/examples/img/up-button_background.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+.up-button:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background-image: url("../../extension-mobile-buttons/examples/img/up-button.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.up-button:active:after {
+    content: "";
+    transform: scale(.9);
+}
+
+
+.down-button {
+    width: 12vw;
+    height: 12vw;
+    position: absolute;
+    background-image: url("../../extension-mobile-buttons/examples/img/down-button-background.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+.down-button:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background-image: url("../../extension-mobile-buttons/examples/img/down-button.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.down-button:active:after {
+    content: "";
+    transform: scale(.9);
+}
+
+
+canvas {
+    position: absolute;
+    background: linear-gradient(goldenrod, palegoldenrod, darkgoldenrod, lightgoldenrodyellow, darkgoldenrod, palegoldenrod, goldenrod);
+    border-radius: .2vw;
+    box-shadow: inset .1vw .2vw .2vw #fff7, inset .05vw .1vw .1vw #0007, -.05vw -.1vw .3vw #0002, inset -.1vw -.2vw .1vw #0003, .05vw .1vw .3vw #0002;
+}
+
+.jsPsychRTIcontainer {
+    background: linear-gradient(goldenrod, palegoldenrod, darkgoldenrod, lightgoldenrodyellow, darkgoldenrod, palegoldenrod, goldenrod);
+    border-radius: .2vw;
+    box-shadow: inset .1vw .2vw .2vw #fff7, inset .05vw .1vw .1vw #0007, -.05vw -.1vw .3vw #0002, inset -.1vw -.2vw .1vw #0003, .05vw .1vw .3vw #0002;
+}
+
+.all {
+    position: absolute;
+    background: red;
+    width: 10vw;
+    height: 10vw;
+    left: 0;
+    top: 0;
+}
+
+
+.subtitle {
+    position: absolute;
+    top: 45vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    height: 60pt;
+    font-size: 50pt;
+    line-height: 60pt;
+    font-weight: bold;
+    letter-spacing: 10pt;
+    color: gold;
+    text-shadow: .01vw .1vw goldenrod, .02vw .2vw 0 darkgoldenrod, .04vw .4vw 0 saddlebrown, 0 0 2vw palegoldenrod;
+}
+
+svg {
+    position: absolute;
+    background: transparent;
+    width: 50vw;
+    height: 50vw;
+    bottom: 55vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    font-weight: 900;
+    font-size: 16pt;
+    letter-spacing: 1.5pt;
+    text-shadow: .05vw .25vw goldenrod, .1vw .5vw 0 darkgoldenrod, .2vw 1vw 0 saddlebrown, 0 0 2vw palegoldenrod;
+}
+
+text {
+    fill: gold;
+}
+
+.doorRight {
+    position: absolute;
+    left: 50vw;
+    bottom: 0;
+    width: 20vw;
+    height: 80vh;
+    background: darkgoldenrod;
+    z-index: -1;
+    box-shadow: inset 3pt 3pt 3pt #fff2, inset 0 2pt 2pt #fff8, inset -3pt 0pt 3pt #0003;
+}
+
+.doorLeft {
+    position: absolute;
+    right: 50vw;
+    bottom: 0;
+    width: 20vw;
+    height: 80vh;
+    background: darkgoldenrod;
+    z-index: -1;
+    box-shadow: inset 3pt 3pt 3pt #0001, inset 0 2pt 2pt #fff8, inset -3pt 0 3pt #0003;
+}
+
+.startButton {
+    position: absolute;
+    left: 50vw;
+    bottom: 5vh;
+    width: 14vw;
+    height: 14vw;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background-color: darkgoldenrod;
+    box-shadow: -3pt 2pt 3pt #0003, -3pt -2pt 3pt #0004, 3pt 2pt 3pt #fff4, 3pt -2pt 3pt #fff3;
+}
+
+.startButton:after {
+    position: absolute;
+    content: "START";
+    font-weight: bold;
+    left: 0;
+    line-height: 14vw;
+    font-size: 3.6vw;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #1f3;
+
+    box-shadow: inset 2vw 2vw 3vw #fff7, inset -2vw -2vw 3vw #0004, 0 0 .2vw #0008, .2vw .2vw .3vw #fff6, -.2vw -.2vw .3vw #0006;
+    transform: scale(.9);
+    color: #0a0;
+    text-shadow: .3vw .3vw .1vw #fffa, -.2vw -.2vw .1vw #0001;
+}
+
+.endButton {
+    position: absolute;
+    right: 2vw;
+    bottom: 2vh;
+    width: 12vw;
+    height: 10vw;
+    border-radius: 50%;
+    background-color: darkgoldenrod;
+}
+
+.endButton:after {
+    position: absolute;
+    content: "END";
+    font-weight: bold;
+    left: 0;
+    line-height: 10vw;
+    font-size: 3vw;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #808;
+    box-shadow: inset 2vw 2vw 3vw #fff7, inset -2vw -2vw 3vw #0004, 0 0 .2vw #0008, .2vw .2vw .3vw #fff6, -.2vw -.2vw .3vw #0006;
+    transform: scale(.9);
+    color: #606;
+    text-shadow: .1vw .1vw .1vw #fff9, -.2vw -.2vw .1vw #0001;
+}
+
+.doorRight {
+    position: absolute;
+    left: 50vw;
+    bottom: 0;
+    width: 20vw;
+    height: 80vh;
+    background: darkgoldenrod;
+    z-index: -1;
+    box-shadow: inset 3pt 0 3pt #fff2, inset -3pt 0pt 3pt #0003, inset 0 12pt 5pt #0003;
+}
+
+.doorLeft {
+    position: absolute;
+    right: 50vw;
+    bottom: 0;
+    width: 20vw;
+    height: 80vh;
+    background: darkgoldenrod;
+    z-index: -1;
+    box-shadow: inset 3pt 0 3pt #fff2, inset -3pt 0pt 3pt #0003, inset 0 12pt 5pt #0003;
+}
+
+
+.frameLeft {
+    position: absolute;
+    background-color: goldenrod;
+    font-family: "Noto Sans Egyptian Hieroglyphs";
+    right: 70vw;
+    bottom: 0;
+    height: 80vh;
+    width: 10vw;
+    line-height: 9.9vh;
+    text-align: center;
+    font-size: 3vw;
+    box-shadow: inset 12pt 0 3pt #fff3, inset -12pt 0 3pt 3pt #0003, 3pt 0 3pt #0005, inset 0 8pt 2pt #0004;
+    text-shadow: 1pt 1pt 1pt #fff7, -1pt -1pt 1pt #0003;
+}
+
+.frameRight {
+    position: absolute;
+    background-color: goldenrod;
+    font-family: "Noto Sans Egyptian Hieroglyphs";
+    left: 70vw;
+    bottom: 0;
+    height: 80vh;
+    width: 10vw;
+    line-height: 9.9vh;
+    text-align: center;
+    font-size: 3vw;
+    box-shadow: inset 12pt 0 3pt #fff3, inset -12pt 0 3pt 3pt #0003, 3pt 0 3pt #0005, inset 0 8pt 2pt #0004;
+    text-shadow: 1pt 1pt 1pt #fff7, -1pt -1pt 1pt #0003;
+}
+
+.frameTop {
+    position: absolute;
+    background-color: goldenrod;
+    font-family: "Noto Sans Egyptian Hieroglyphs";
+    left: 50vw;
+    bottom: 80vh;
+    height: 20vh;
+    width: 70vw;
+    transform: translateX(-50%);
+    line-height: 20vh;
+    text-align: center;
+    font-size: 4.5vw;
+    letter-spacing: 1vw;
+    box-shadow: inset 12pt 0 3pt #fff3, inset -12pt 0 3pt 3pt #0003, 3pt 0 3pt #0005, inset 0 -12pt 3pt -10pt #0005;
+    text-shadow: 1pt 1pt 1pt #fff7, -1pt -1pt 1pt #0003;
+}
+
+.background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: radial-gradient(goldenrod, #7e4d00);
+    width: 100vw;
+    height: 100vh;
+    z-index: -99;
+}
+
+.background:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(#0001, #0001 7vh, #0003 7.5vh, #fff3 8vh, #4001 8.1vh, #4001 15vh, #0003 15.5vh, #fff3 16vh, #0001 16.2vh);
+}
+
+.background:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(90deg, #0001, #0001 7vw, #0003 7.2vw, #fff3 7.4vw, #1821 7.5vw, #1821 10vw, #0004 10.2vw, #fff3 10.4vw, #0001 10.5vw);
+}
+
+
+
+.score {
+    position: absolute;
+    text-align: right;
+    right: 1vw;
+    top: 3vh;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 2.5vw;
+    color: gold;
+    text-shadow: .02vw .2vw goldenrod, .04vw .4vw 0 darkgoldenrod, .08vw .8vw 0 saddlebrown, 0 0 2vw palegoldenrod;
+}
+
+
+.highScore {
+    position: absolute;
+    text-align: left;
+    left: 1vw;
+    top: 3vh;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.8vw;
+    color: gold;
+    text-shadow: .02vw .2vw goldenrod, .04vw .4vw 0 darkgoldenrod, .08vw .8vw 0 saddlebrown, 0 0 2vw palegoldenrod;
+}
+
+.explanationContainer {
+    position: absolute;
+    top: 2vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    width: 68vw;
+    height: 55vh;
+    padding: 1vw;
+    font-size: 1.5vw;
+    font-weight: bold;
+    background: navajowhite;
+    border-radius: 1%;
+
+}
+
+.symbol {
+    font-size: 5vw;
+    color: #faf;
+    text-shadow: 0 0 .25vw #f7f, 0 0 .5vw #f0f;
+    animation: ominous 1s ease-in-out infinite alternate;
+}
+
+.fixationSymbol {
+    font-size: 20vw;
+    color: #faf;
+    text-shadow: 0 0 1vw #f7f, 0 0 2vw #f0f;
+    animation: ominous 1s ease-in-out infinite alternate;
+}
+
+@keyframes ominous {
+    0% {transform: rotate(-3deg)}
+    50% {transform: scale(.9)}
+    90% {transform: rotate(3deg)}
+    95% {transform: rotate(0deg)}
+    100% {transform: rotate(3deg)}
+}
+
+.points {
+    font-size: 10vw;
+    color: gray;
+}
+
+.points.positive {
+    color: #afb;
+    text-shadow: 0 0 1vw #4f7, 0 0 2vw #0f0;
+    font-weight: bold;
+    animation: gain 1s linear;
+}
+
+.points.negative {
+    color: #f9a;
+    text-shadow: 0 0 1vw #f67, 0 0 2vw #f00;
+    font-weight: bold;
+    animation: shrink 1s linear;
+}
+
+@keyframes gain {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+@keyframes shrink {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(.8);
+        opacity: 0;
+    }
+}
+

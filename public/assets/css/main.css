@@ -1,0 +1,133 @@
+:root {
+    --light-color: #f00e;
+    --dark-color: #500b;
+    --deep-dark-color: #500b;
+    --dark-color-transparent: #500b;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 3px #000c;
+}
+
+body {
+    height: 100%;
+    background: #fde;
+}
+
+
+.page-container {
+    padding: 94px 40px;
+    min-height: 100vh;
+}
+
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 34pt;
+    text-align: center;
+}
+
+img.title {
+    display: block;
+    margin: 10px auto;
+}
+
+p {
+    font-size: 16pt;
+    line-height: 20pt;
+    letter-spacing: 1pt;
+    word-spacing: 1pt;
+    text-align: justify;
+    padding: 20px 0;
+    border-bottom: solid 1px #fff;
+}
+
+a {
+    color: #dfe;
+    font-weight: bold;
+    text-shadow: 0 0 4px #7fea;
+
+}
+
+.nav-button {
+    background: #fff0;
+    border-radius: 1px;
+    width: 200px;
+    height: 50px;
+    margin: 34px auto;
+    display: flex;
+    align-content: center;
+    border: solid 2px #dfe;
+    text-shadow: 0 0 4px #7fe9;
+    box-shadow: 0 0 4px #7fe9, inset 0 0 4px #7fe9;
+}
+
+.games-button-container {
+    text-align: center;
+}
+
+.game-button {
+    border-radius: 6px;
+    background-color: #0004;
+    width: 160px;
+    height: 160px;
+    margin: 30px 40px;
+    display: inline-block;
+    border: solid 3px #dfe;
+    text-shadow: 0 0 6px #7fec;
+    box-shadow: 0 0 6px #7fec, inset 0 0 6px #7fec;
+    vertical-align: top;
+}
+
+.game-button.stroop {
+    background-image: url("../img/stroop_bg.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.game-button.symb_dir_col_stroop {
+    background-image: url("../img/symb_dir_col_stroop_bg.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.game-button a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.nav-button a {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 50px;
+    color: #dfe;
+    letter-spacing: 2pt;
+    font-size: 14pt;
+}
+
+@media only screen and (max-width: 600px) {
+    .page-container {
+        margin: 0;
+    }
+}
+
+

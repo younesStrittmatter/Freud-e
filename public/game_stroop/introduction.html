@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Introduction</title>
+    <link rel="stylesheet" href="src/css/mobileMain.css">
+    <script src="jatos.js"></script>
+</head>
+<body>
+<h1>Introduction</h1>
+<div class="paragraphDiv">
+    Hello and welcome. Thank you for helping us out with your participation.
+</div>
+<div class="paragraphDiv">
+    When you start this program, you will be randomly assigned to a video game.
+</div>
+<div class="paragraphDiv">
+    There will be no explanation. Part of the fun is to figure out how to play the game.<br>
+    Don't worry most of the games are straight forward.
+</div>
+<div class="paragraphDiv">
+    You can play the games as long as you want. You can also play the game as often as you want. Feel free to come back
+    in the future to check out if there are new games added.<br>
+    Have fun and try to reach a high score!
+</div>
+<div class="touchButton tLeft">End</div>
+<div class="touchButton tRight">Continue</div>
+<script>
+    jatos.onload(function () {
+        // handle scroll
+        let buttons = document.getElementsByClassName('touchButton');
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.color = '#F3EAC0';
+        }
+
+        let continueButton = document.getElementsByClassName('tRight')[0];
+        let endButton = document.getElementsByClassName('tLeft')[0];
+        continueButton.addEventListener('touchstart', proceed);
+        endButton.addEventListener('touchstart', abort);
+
+        function proceed() {
+            let j_pos = 3;
+            if (Math.random() < .5) {
+                j_pos = 4;
+            }
+            jatos.startComponentByPos(j_pos);
+        }
+
+        function abort() {
+            if (confirm('You are about to leave the experiment')) {
+                jatos.abortStudy()
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

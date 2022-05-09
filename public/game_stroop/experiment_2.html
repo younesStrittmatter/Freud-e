@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Experiment</title>
+    <script src="https://unpkg.com/jspsych@7.2.1"></script>
+    <script src="plugin-rti/index.js"></script>
+    <script src="extension-mobile-buttons/index.js"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.0"></script>
+    <link href="https://unpkg.com/jspsych@7.2.1/css/jspsych.css" rel="stylesheet" type="text/css"/>
+    <link href="extension-mobile-buttons/css/extension-mobile-buttons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+Egyptian+Hieroglyphs" rel="stylesheet">
+    <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.1.0"></script>
+    <link href="src/css/experiment2.css" rel="stylesheet" type="text/css">
+    <script src="jatos.js"></script>
+</head>
+
+<script>
+    jatos.onload(function () {
+        let rand_string = Math.random().toString(16).substr(2, 14);
+        let exp_name = 'rti_';
+
+        let layouts = [
+            {
+                left: {key: 'u', css: 'up-button', style: {left: '4vw', bottom: '4vw'}},
+                right: {key: 'd', css: 'down-button', style: {right: '4vw', bottom: '4vw'}},
+            },
+            {
+                left: {key: 's', css: 'startButton'},
+                right: {key: 'e', css: 'endButton'},
+            },
+            {
+                left: {key: 's', css: 'startButton'},
+            },
+
+        ];
+
+        let layouts_2 = [
+            {
+                left: {key: 'u', css: 'up-button', style: {right: '4vw', bottom: '22vw'}},
+                right: {key: 'd', css: 'down-button', style: {right: '4vw', bottom: '4vw'}},
+            },
+            {
+                left: {key: 's', css: 'startButton'},
+                right: {key: 'e', css: 'endButton'},
+            },
+            {
+                left: {key: 's', css: 'startButton'},
+            }
+        ];
+
+        let layout_list = [layouts, layouts_2]
+
+        let l = 0;
+
+        if (Math.random() < .5)
+        {
+            l = 1
+        }
+
+        let jsPsych = initJsPsych({
+            extensions: [{
+                type: jsPsychMobileButtonsExtension, params: layout_list[l],
+            }],
+            on_finish: function () {
+                let resultJson = jsPsych.data.get().csv();
+                jatos.submitResultData(resultJson, jatos.startLastComponent);
+            }
+        });
+
+
+
+
+
+        let score = 0;
+        let high_score = jatos.batchSession.get(exp_name + '_highscore');
+        if (high_score != null) {
+            high_score = parseInt(high_score)
+        } else {
+            high_score = 0
+        }
+
+        jsPsych.data.addProperties(
+            {
+                subject_id: rand_string,
+                exp_name: exp_name,
+                layout: l,
+            }
+        );
+
+        window.addEventListener("beforeunload", function (e) {
+            let resultJson = jsPsych.data.get().csv();
+            jatos.submitResultData(resultJson, jatos.startLastComponent);
+        });
+
+
+        let bG_div = document.createElement('div');
+        let score_div = document.createElement('div');
+        let highScore_div = document.createElement('div');
+        bG_div.classList.add('background');
+        score_div.classList.add('score');
+        highScore_div.classList.add('highScore');
+
+        let start_menu = {
+            type: jsPsychHtmlKeyboardResponse,
+            choices: ['s', 'e'],
+            response_ends_trial: true,
+            stimulus: '<div class="background"></div><svg viewBox="0 0 100 100">' +
+                '<path id="curve" fill="transparent" d="M25,100 C35,90 65,90 75,100"/>' +
+                '<text>' +
+                '<textPath xlink:href="#curve">' +
+                'GEM' +
+                '</textPath>' +
+                '</text>' +
+                '</svg>' +
+                '<div class="subtitle">HUNTER</div>' +
+                '<div class="doorRight"></div>' +
+                '<div class="doorLeft"></div>' +
+                '<div class="frameLeft"><span style="color: #f00;">𓀀</span><br><span style="color: #f0f;">𓁐</span><br><span style="color: #0f0;">𓃀</span><br><span style="color: #00f;">𓈖</span><br><span style="color: #0ff">𓌱</span><br><span style="color: #f00">𓅓</span><br><span style="color: #ff0;">𓎛</span><br><span style="color: #f0f;">𓅱</span></div>' +
+                '<div class="frameRight"><span style="color: #0ff;">𓎛</span><br><span style="color: #f0f;">𓅱</span><br><span style="color: #f00;">𓀔</span><br><span style="color: #f0f;">𓈖</span><br><span style="color: #ff0">𓌱</span><br><span style="color: #00f;">𓅓</span><br><span style="color: #f00">𓎛</span><br><span style="color: #0f0">𓇋 𓇋</span></div>' +
+                '<div class="frameTop"><span style="color: #0ff">𓈖</span> <span style="color: #0f0">𓌱</span> <span style="color: #f00">𓅓</span> <span style="color: #f0f">𓎛</span> <span style="color: #00f;">𓇋𓇋</span> <span style="color: #ff0">𓏏</span> <span style="color: #0ff;">𓁐</span> <span style="color: #f00;">𓐍</span> <span style="color: #f0f">𓀔</span></div>' +
+                `<div class="score">GEMS<br>${score}</div>` +
+                `<div class="highScore">TOP HUNTER<br>${high_score}</div>`,
+            extensions: [{
+                type: jsPsychMobileButtonsExtension, params: {layout: 1}
+            }],
+            on_finish() {
+                let data = jsPsych.data.get().last().trials[0];
+                if (data.response === 'e') {
+                    jatos.startLastComponent()
+                }
+                console.log(data);
+            }
+        };
+
+        let explanation = {
+            type: jsPsychHtmlKeyboardResponse,
+            choices: ['s', 'e'],
+            response_ends_trial: true,
+            stimulus:
+                '<div class="background"></div>' +
+                '<div class="explanationContainer">' +
+                'On your journey through a pyramid,' +
+                ' you stumble across a panel with gemstones.' +
+                ' There is a note:<br>' +
+                '<span class="symbol">𓂕</span> Where are you?  ' +
+                '<span class="symbol">𓂾</span> Where do you go?<br></div>' +
+                `<div class="score">GEMS<br>${score}</div>` +
+                `<div class="highScore">TOP HUNTER<br>${high_score}</div>`,
+            extensions: [{
+                type: jsPsychMobileButtonsExtension, params: {layout: 2}
+            }],
+        };
+
+        let position_symbol = '𓂕';
+        let orientation_symbol = '𓂾';
+
+        let task_list = ['position', 'orientation'];
+        let correct_list = ['up', 'down'];
+        let coherence_list_easy = [1, .9];
+        let congruency_list_easy = [.5];
+        let coherence_list_medium = [1, .9, .8];
+        let congruency_list_medium = [1, 0];
+        let coherence_list_hard = [.7, .6];
+        let congruency_list_hard = [1, .5, 0];
+
+        let timeline_variables_list_easy = [];
+        let timeline_variables_list_medium = [];
+        let timeline_variables_list_hard = [];
+
+        for (let t = 0; t < task_list.length; t++) {
+            for (let cor = 0; cor < correct_list.length; cor++) {
+                for (let coh = 0; coh < coherence_list_hard.length; coh++) {
+                    for (let cong = 0; cong < congruency_list_hard.length; cong++) {
+                        let task = task_list[t];
+                        let correct = correct_list[cor];
+                        let coherence = coherence_list_hard[coh];
+                        let congruency = congruency_list_hard[cong];
+                        let variable = {
+                            fixation_stimulus: null,
+                            coherent_position: correct,
+                            coherent_orientation: correct,
+                            position_coherence: null,
+                            orientation_coherence: null,
+                            correct_key: null
+                        };
+                        if (correct === 'up') {
+                            variable.correct_key = 'u';
+                        } else {
+                            variable.correct_key = 'd';
+                        }
+                        if (task === 'position') {
+                            variable.fixation_stimulus = position_symbol;
+                            variable.position_coherence = coherence;
+                            variable.orientation_coherence = congruency;
+                        } else {
+                            variable.fixation_stimulus = orientation_symbol;
+                            variable.orientation_coherence = coherence;
+                            variable.position_coherence = congruency;
+                        }
+                        timeline_variables_list_hard.push(variable);
+                    }
+                }
+            }
+        }
+
+        for (let t = 0; t < task_list.length; t++) {
+            for (let cor = 0; cor < correct_list.length; cor++) {
+                for (let coh = 0; coh < coherence_list_medium.length; coh++) {
+                    for (let cong = 0; cong < congruency_list_medium.length; cong++) {
+                        let task = task_list[t];
+                        let correct = correct_list[cor];
+                        let coherence = coherence_list_medium[coh];
+                        let congruency = congruency_list_medium[cong];
+                        let variable = {
+                            fixation_stimulus: null,
+                            coherent_position: correct,
+                            coherent_orientation: correct,
+                            position_coherence: null,
+                            orientation_coherence: null,
+                            correct_key: null
+                        }
+                        if (correct == 'up') {
+                            variable.correct_key = 'u';
+                        } else {
+                            variable.correct_key = 'd';
+                        }
+                        if (task === 'position') {
+                            variable.fixation_stimulus = position_symbol;
+                            variable.position_coherence = coherence;
+                            variable.orientation_coherence = congruency;
+                        } else {
+                            variable.fixation_stimulus = orientation_symbol;
+                            variable.orientation_coherence = coherence;
+                            variable.position_coherence = congruency;
+                        }
+                        timeline_variables_list_medium.push(variable);
+                    }
+                }
+            }
+        }
+
+        for (let t = 0; t < task_list.length; t++) {
+            for (let cor = 0; cor < correct_list.length; cor++) {
+                for (let coh = 0; coh < coherence_list_easy.length; coh++) {
+                    for (let cong = 0; cong < congruency_list_easy.length; cong++) {
+                        let task = task_list[t];
+                        let correct = correct_list[cor];
+                        let coherence = coherence_list_easy[coh];
+                        let congruency = congruency_list_easy[cong];
+                        let variable = {
+                            fixation_stimulus: null,
+                            coherent_position: correct,
+                            coherent_orientation: correct,
+                            position_coherence: null,
+                            orientation_coherence: null,
+                            correct_key: null
+                        }
+                        if (correct === 'up') {
+                            variable.correct_key = 'u';
+                        } else {
+                            variable.correct_key = 'd';
+                        }
+                        if (task === 'position') {
+                            variable.fixation_stimulus = position_symbol;
+                            variable.position_coherence = coherence;
+                            variable.orientation_coherence = congruency;
+                        } else {
+                            variable.fixation_stimulus = orientation_symbol;
+                            variable.orientation_coherence = coherence;
+                            variable.position_coherence = congruency;
+                        }
+                        timeline_variables_list_easy.push(variable);
+                    }
+                }
+            }
+        }
+        timeline_variables_list_easy = shuffleArray(timeline_variables_list_easy);
+        timeline_variables_list_medium = shuffleArray(timeline_variables_list_medium);
+        timeline_variables_list_hard = shuffleArray(timeline_variables_list_hard);
+
+
+        let fixation = {
+            type: jsPsychHtmlKeyboardResponse,
+            choices: ['s', 'e'],
+            response_ends_trial: false,
+            trial_duration: 1500,
+            stimulus: function () {
+                return '<div class="background"></div>' +
+                    `<div class="fixationSymbol">${jsPsych.timelineVariable('fixation_stimulus')}</div>` +
+                    `<div class="score">GEMS<br>${score}</div>` +
+                    `<div class="highScore">TOP HUNTER<br>${high_score}</div>`;
+            }
+        };
+
+
+        let trial = {
+            type: jsPsychRti,
+            choices: ['u', 'd'],
+            trial_duration: 2500,
+            response_ends_trial: true,
+            coherent_position: jsPsych.timelineVariable('coherent_position'),
+            coherent_orientation: jsPsych.timelineVariable('coherent_orientation'),
+            position_coherence: jsPsych.timelineVariable('position_coherence'),
+            orientation_coherence: jsPsych.timelineVariable('orientation_coherence'),
+            columns: 11,
+            rows: 11,
+            cell_width: 32,
+            cell_height: 32,
+            horizont: 'black',
+            data: {
+                correct_key: jsPsych.timelineVariable('correct_key')
+            },
+            extensions: [{
+                type: jsPsychMobileButtonsExtension
+            }],
+            on_load: function () {
+                let display_element = jsPsych.getDisplayElement();
+                score_div.innerHTML = `GEMS<br>${score}`;
+                highScore_div.innerHTML = `TOP HUNTER<br>${high_score}`;
+                display_element.appendChild(bG_div);
+                display_element.appendChild(score_div);
+                display_element.appendChild(highScore_div);
+            }
+        };
+
+        let feedback = {
+            type: jsPsychHtmlKeyboardResponse,
+            choices: ['s', 'e'],
+            response_ends_trial: false,
+            trial_duration: 1000,
+            stimulus: function () {
+                let data = jsPsych.data.get().last().trials[0];
+                let points = 0;
+                if (data.rt !== null && data.response !== null) {
+                    points = 10 - Math.floor(data.rt / 250);
+                }
+                if (data.correct_key === data.response) {
+                    feedbackClass = 'points positive';
+                    score += points;
+                    if (score > high_score) {
+                        high_score = score;
+                        jatos.batchSession.set(exp_name + '_highscore', high_score);
+                    }
+                } else {
+                    points = 0;
+                    feedbackClass = 'points';
+                }
+                if (data.response !== null && data.correct_key !== data.response) {
+                    points = -1;
+                    score += points;
+                    feedbackClass = 'points';
+                }
+                return '<div class="background"></div>' +
+                    `<div class="${feedbackClass}"">${points}</div>` +
+                    `<div class="score">GEMS<br>${score}</div>` +
+                    `<div class="highScore">TOP HUNTER<br>${high_score}</div>`
+            }
+        };
+
+        /*** CREATE TIMELINE AND RUN THE EXPERIMENT ***/
+            //timeline = [fixation, trial, feedback, start_menu, explanation, trial];
+
+        let timeline = [
+                {
+                    timeline: [fixation, trial, feedback],
+                    timeline_variables: timeline_variables_list_easy
+                },
+                {
+                    timeline: [fixation, trial, feedback],
+                    timeline_variables: timeline_variables_list_medium
+                },
+                {
+                    timeline: [fixation, trial, feedback],
+                    timeline_variables: timeline_variables_list_hard
+                },
+            ];
+
+        let restart = {
+            type: jsPsychHtmlKeyboardResponse,
+            choices: ['s', 'e'],
+            response_ends_trial: true,
+            stimulus: '<div class="background"></div><svg viewBox="0 0 100 100">' +
+                '<path id="curve" fill="transparent" d="M25,100 C35,90 65,90 75,100"/>' +
+                '<text>' +
+                '<textPath xlink:href="#curve">' +
+                'GEM' +
+                '</textPath>' +
+                '</text>' +
+                '</svg>' +
+                '<div class="subtitle">HUNTER</div>' +
+                '<div class="doorRight"></div>' +
+                '<div class="doorLeft"></div>' +
+                '<div class="frameLeft"><span style="color: #f00;">𓀀</span><br><span style="color: #f0f;">𓁐</span><br><span style="color: #0f0;">𓃀</span><br><span style="color: #00f;">𓈖</span><br><span style="color: #0ff">𓌱</span><br><span style="color: #f00">𓅓</span><br><span style="color: #ff0;">𓎛</span><br><span style="color: #f0f;">𓅱</span></div>' +
+                '<div class="frameRight"><span style="color: #0ff;">𓎛</span><br><span style="color: #f0f;">𓅱</span><br><span style="color: #f00;">𓀔</span><br><span style="color: #f0f;">𓈖</span><br><span style="color: #ff0">𓌱</span><br><span style="color: #00f;">𓅓</span><br><span style="color: #f00">𓎛</span><br><span style="color: #0f0">𓇋 𓇋</span></div>' +
+                '<div class="frameTop"><span style="color: #0ff">𓈖</span> <span style="color: #0f0">𓌱</span> <span style="color: #f00">𓅓</span> <span style="color: #f0f">𓎛</span> <span style="color: #00f;">𓇋𓇋</span> <span style="color: #ff0">𓏏</span> <span style="color: #0ff;">𓁐</span> <span style="color: #f00;">𓐍</span> <span style="color: #f0f">𓀔</span></div>' +
+                `<div class="score">GEMS<br>${score}</div>` +
+                `<div class="highScore">TOP HUNTER<br>${high_score}</div>`,
+            extensions: [{
+                type: jsPsychMobileButtonsExtension, params: {layout: 1}
+            }],
+            on_finish: function () {
+                score = 0;
+                timeline_variables_list_easy = shuffleArray(timeline_variables_list_easy);
+                timeline_variables_list_medium = shuffleArray(timeline_variables_list_medium);
+                timeline_variables_list_hard = shuffleArray(timeline_variables_list_hard);
+            }
+        };
+
+        var loop_node = {
+            timeline: timeline.concat([restart]),
+            loop_function: function (data) {
+                if (jsPsych.data.get().last().trials[0].response === 's') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        };
+        let enter_fullscreen = {
+            type: jsPsychFullscreen,
+            message: '<div class="fullscreen" ">The game starts.<br>You will enter fullscreen mode now.</div>',
+            fullscreen_mode: true
+        };
+
+        jsPsych.run([enter_fullscreen, start_menu, explanation, loop_node]);
+
+        function shuffleArray(array) {
+            let curId = array.length;
+            // There remain elements to shuffle
+            while (0 !== curId) {
+                // Pick a remaining element
+                let randId = Math.floor(Math.random() * curId);
+                curId -= 1;
+                // Swap it with the current element.
+                let tmp = array[curId];
+                array[curId] = array[randId];
+                array[randId] = tmp;
+            }
+            return array;
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+.gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    z-index: -2;
+}
+
+
+.gradient._1 {
+    background: repeating-radial-gradient(#f0d2, #f000, #f003, #f0f0, #f0d2);
+    background-size: 200% 300%;
+    animation: gradient linear infinite 23s;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 20% -110%;
+    }
+    100% {
+        background-position: -180% 190%;
+    }
+}
+
+.gradient._2 {
+    background: repeating-radial-gradient(#00d0, #f003, #fcd0, #f002, #00d0);
+    background-size: 300% 200%;
+    animation: gradient2 ease-in-out alternate infinite 27s;
+}
+
+@keyframes gradient2 {
+    0% {
+        background-position: 30% 10%;
+    }
+    100% {
+        background-position: 330% -190%;
+    }
+}
+
+.gradient._3 {
+    background: repeating-radial-gradient(#f0d1, #0f00, #f0d2, #fcd0, #f0d1);
+    background-size: 300% 200%;
+    animation: gradient3 ease-in-out infinite 31s;
+}
+
+@keyframes gradient3 {
+    0% {
+        background-position: 40% 130%;
+    }
+    100% {
+        background-position: -260% -70%;
+    }
+}
+
+.gradient._4 {
+    background: repeating-radial-gradient(#f0a4, #fa03, #f000, #f0f2, #f001, #fa04);
+    background-size: 300% 400%;
+    animation: gradient4 linear infinite 37s;
+}
+
+@keyframes gradient4 {
+    0% {
+        background-position: 10% -170%;
+    }
+    100% {
+        background-position: -290% 230%;
+    }
+}
+
+.gradient._5 {
+    background: repeating-radial-gradient(#fa01, #fa00, #f0d2, #0af1, #faf0, #f003, #fa01);
+    background-size: 300% 200%;
+    animation: gradient5 ease-in-out alternate infinite 43s;
+}
+
+@keyframes gradient5 {
+    0% {
+        background-position: -30% -170%;
+    }
+    100% {
+        background-position: 270% 30%;
+    }
+}
+
+.gradient._6 {
+    background: repeating-radial-gradient(#f0f2, #fa00, #f000, #fa03, #f000, #f0d2);
+    background-size: 200% 200%;
+    animation: gradient6 linear infinite 55s;
+}
+
+@keyframes gradient6 {
+    0% {
+        background-position: 30% -120%;
+    }
+    100% {
+        background-position: -170% 80%;
+    }
+}
+
+.gradient._7 {
+    background: repeating-radial-gradient(#f001, #f0d0, #fad2, #f0d1, #f0a0, #f001);
+    background-size: 400% 200%;
+    animation: gradient7 ease-in-out alternate infinite 35s;
+}
+
+@keyframes gradient7 {
+    0% {
+        background-position: -130% 70%;
+    }
+    100% {
+        background-position: 270% -130%;
+    }
+}
+
+.gradient._8 {
+    background: repeating-radial-gradient(#f0d3, #fad0, #fa01, #f0d3);
+    background-size: 200% 300%;
+    animation: gradient8 ease-in-out alternate infinite 41s;
+}
+
+@keyframes gradient8 {
+    0% {
+        background-position: 30% 70%;
+    }
+    100% {
+        background-position: 230% 370%;
+    }
+}

@@ -1,0 +1,301 @@
+:root {
+    --background-color: #999;
+    --background-color-darkened: #888;
+}
+
+body {
+    background: var(--background-color);
+
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.exitButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 4vw;
+    height: 4vw;
+    line-height: 4vw;
+    font-size: 3vw;
+    border-radius: 20%;
+    border-left: .5vw solid #0001;
+    border-bottom: .5vw solid #0001;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #0006;
+    text-align: center;
+    background: #0001;
+}
+
+.exitButton:after {
+    content: 'x';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.lifeContainer {
+    position: absolute;
+    right: 3vw;
+    top: 0;
+    padding: 2vw;
+    display: flex;
+}
+
+.lifeSymbol {
+    position: relative;
+    margin: 1.2vw;
+    transform: scaleX(.7) rotate(45deg);
+}
+
+.lifeSymbol.on {
+    border-top: solid 15px #0a4;
+    border-left: solid 15px #afc;
+    border-right: solid 15px #252;
+    border-bottom: solid 15px #0a4;
+    box-shadow: 0 0 .5vw #0005;
+}
+
+.lifeSymbol.blink {
+    border-top: solid 15px #7fa;
+    border-left: solid 15px #efe;
+    border-right: solid 15px #5a7;
+    border-bottom: solid 15px #7fa;
+    box-shadow: 0 0 .5vw #0005, 0 0 1vw #afb9;
+}
+
+.lifeSymbol.off {
+    width: 30px;
+    height: 30px;
+    background: #0002;
+    box-shadow: inset 3px 0 2px #0002, inset -3px 0 1px #fff4;
+}
+
+.lifeSymbol.off:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.5);
+    box-shadow: .1vw 0 .01vw #0001, inset -.1vw 0 .2vw #0003, inset .1vw 0 .2vw #fff5, -.1vw 0 .1vw #fff5;
+}
+
+.lifeSymbol:after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%, -50%) scale(1.5);
+    box-shadow: .1vw 0 .01vw #0001, inset -.1vw 0 .2vw #0003, inset .1vw 0 .2vw #fff5, -.1vw 0 .1vw #fff5;
+}
+
+#trialTimerOuter {
+    position: absolute;
+    left: 50vw;
+    bottom: 4vh;
+    transform: translateX(-50%);
+
+}
+
+.progressCircleOuter {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--background-color) 50%, transparent 50%), linear-gradient(90deg, #028cd5 50%, var(--background-color) 50%);
+    box-shadow: .1vw .1vw .1vw #0001, -.1vw -.1vw .1vw #fff1, inset .1vw .1vw .1vw #0002, inset -.1vw -.1vw .1vw #fff2;
+}
+
+.progressCircleOuter:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #00000010;
+}
+
+.progressCircleInner {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    border-radius: 50%;
+    background: var(--background-color);
+    transform: scale(.7);
+    box-shadow: inset .1vw .1vw .1vw #fff2, inset -.1vw -.1vw .1vw #0002;
+}
+
+
+.progressCircleInner.blinkTimer {
+    background: #ffa;
+}
+
+@keyframes blinking {
+    0% {
+        background: #f00
+    }
+    100% {
+        background: #ddd
+    }
+}
+
+.scoreBoard {
+    position: absolute;
+    display: grid;
+    gap: 10px 30px;
+    top: 0;
+    left: 0;
+    padding: 2vw;
+    font-size: 12pt;
+    text-shadow: -1pt -1pt 1pt #fff4, 1pt 1pt 1pt #0003;
+    color: #d9e269;
+}
+
+.boardPrompt.blinkScore {
+    text-shadow: 0 0 2pt #f0ffe0a0;
+    color: #efff99;
+}
+
+.boardPrompt {
+    font-family: sans-serif;
+    font-weight: 800;
+    letter-spacing: 1pt;
+}
+
+.boardPrompt.highScore {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.boardPrompt.level {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.boardPrompt.score {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.boardPrompt.multiplier {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    font-size: 16pt;
+}
+
+.target_stimulus {
+    position: absolute;
+    font-size: 10vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.target_stimulus:after {
+    color: #0001;
+    position: absolute;
+    width: 300%;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    text-align: center;
+    animation: jump 4000ms infinite step-start forwards;
+}
+
+.target_stimulus.word:after {
+    content: 'WORD';
+}
+
+.target_stimulus.color:after {
+    content: 'COLOR';
+}
+
+@keyframes jump {
+    0% {
+        transform: translate(-50%, 10%) scale(1.2);
+        opacity: 0;
+    }
+    20% {
+        transform: translate(-51%, 15%) scale(1.02);
+    }
+    30% {
+        transform: translate(-48%, -14%) scale(1.13);
+    }
+    45% {
+        transform: translate(-53%, 0%) scale(1.04);
+    }
+    58% {
+        transform: translate(-50%, -9%) scale(1.01);
+    }
+    70% {
+        transform: translate(-47%, 11%) scale(1.08);
+    }
+    87% {
+        transform: translate(-52%, 0%) scale(1.2);
+    }
+}
+
+.lvlProgressbarContainer {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    width: 20vw;
+    height: 3vh;
+    border-radius: 1.5vh;
+    box-shadow: inset .1vw .1vw .05vw #fff3, inset -.1vw -.1vw .1vw #0002;
+}
+
+.lvlProgressbarInnerContainer {
+    position: relative;
+    left: 2%;
+    top: 20%;
+    width: 96%;
+    height: 60%;
+    border-radius: .9vh;
+    box-shadow: inset -.1vw -.1vw .05vw #fff3, inset .1vw .1vw .1vw #0002;
+    background: #0001;
+}
+
+.lvlProgressbar {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 98%;
+    border-radius: .9vh;
+    background: blue;
+    box-shadow: inset .1vw .1vw .05vw #fff4, inset -.1vw -.1vw .1vw #0002;
+}
+
+#timeLeft {
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: sans-serif;
+    font-size: 24pt;
+    font-weight: bold;
+}

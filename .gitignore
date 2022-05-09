@@ -1,0 +1,14 @@
+.idea
+node_modules
+.firebaserc
+firestore.indexes.json
+package-lock.json
+public/src/js/init.js
+public/dist
+firestore-debug.log
+firebase-debug.log
+*.log
+firestore.rules
+public/src/js/init.js
+public/src/js/io.js
+twitter
